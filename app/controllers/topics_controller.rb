@@ -17,4 +17,10 @@ class TopicsController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    topic = Topic.find(params[:id]).destroy
+    flash[:success] = "You've deleted #{topic.name}. Great work...."
+    redirect_to root_path   #, :country_id => params[:country_id]
+  end
+
 end
