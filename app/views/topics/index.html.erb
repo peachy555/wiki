@@ -1,0 +1,17 @@
+<h1>Wiki Prototype</h1>
+
+<h2>List of topics:</h2>
+<%= link_to "Add topic", new_topic_path %>
+<ul>
+  <% @topics.each do |t| %>
+    <li><%= link_to t.name, topic_path(t.id) %></li>
+  <% end %>
+</ul>
+
+
+<!-- To do list: -->
+<!-- 1. Dropdown tag search -->
+  <!-- 1. Need array of tags to create options list -->
+  <!-- 2. Know how to pass selected tags (values); maybe though submitting form -->
+<!-- 2. Dropdown topic search -->
+<!-- 3. Fix arrangement/positioning of side menu (for searching) -->

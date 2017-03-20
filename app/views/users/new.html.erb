@@ -1,0 +1,22 @@
+<%= form_for @user do |f| %>
+  <!-- Render error message -->
+  <%= render partial: "includes/form_errors", locals: {form: f} %>
+  <!-- Actual input form -->
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
+    <!-- Choosing account type through dropdown menu -->
+    <%= f.select :user_type, [['Free account', 'free'], ['Member account', 'member'], ['Admin account', 'admin'], ]%>
+  <p>
+    <%= f.submit "Signup" %>
+  </p>
+<%end%>

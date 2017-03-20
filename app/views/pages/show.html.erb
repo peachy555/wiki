@@ -1,0 +1,20 @@
+<h1><%= @page.name %></h1>
+<h3>Tags:</h3>
+<ul>
+  <% @page.tags.each do |tag| %>
+    <li>
+      <%= link_to tag.name, tag_path(tag.id) %>
+      <%# tag.name %>
+    </li>
+  <% end %>
+</ul>
+<h3><%= @page.free_content %></h3>
+<% if @user.present? %>
+  <% if @user.user_type != "free" %>
+    <h3><%= @page.member_content %></h3>
+  <% else %>
+    <h3>No access for free account</h3>
+  <% end %>
+<% else %>
+  <h3>Please log in to member account</h3>
+<% end %>

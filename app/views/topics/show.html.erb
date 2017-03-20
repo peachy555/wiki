@@ -1,0 +1,8 @@
+<h1><%= @topic.name %></h1>
+
+<h2>List of related pages:</h2>
+<ul>
+  <% @topic.pages.each do |page| %>
+    <li><%= link_to page.name, page_path(page.id, topic_id: @topic.id) %></li>
+  <% end %>
+</ul>

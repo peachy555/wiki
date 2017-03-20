@@ -1,0 +1,10 @@
+<% if form.object.errors.messages.present? %>
+  <div class="ui message transition error">
+    <div class="header">Please resolve:</div>
+    <ul>
+      <% form.object.errors.full_messages.each do |m| %>
+        <li><%= m %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
