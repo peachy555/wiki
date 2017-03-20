@@ -4,8 +4,8 @@
     <title>Fake Wiki</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
 
     <!-- <link rel="stylesheet" href="../assets/semantic.min.css">
     <script src="../assets/semantic.min.js"></script> -->
@@ -15,7 +15,7 @@
     <%= render "includes/navigation" %>
 
     <div class="ui main text container">
-      <%= render "includes/flash_notices" %>
+      <%= render "includes/flash_notices"   %>
       <%= render "includes/side_menu" %>
       <%= yield %>
     </div>

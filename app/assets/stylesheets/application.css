@@ -13,14 +13,27 @@
  *= require_tree .
  *= require_self
  */
- .ui.menu .item img.logo {
-   margin-right: 1.5em;
- }
- .main.container {
-   margin-top: 7em;
- }
+  .ui.menu .item img.logo {
+    margin-right: 1.5em;
+  }
+  .main.container {
+    margin-top: 7em;
+    margin-left:300px!important;
+  }
 
- .ui.footer.segment {
-   margin: 5em 0em 0em;
-   padding: 5em 0em;
- }
+  .ui.footer.segment {
+    margin: 5em 0em 0em;
+    padding: 5em 0em;
+  }
+
+  .ui.left.fixed.vertical.menu {
+    top:50px;
+  }
+
+  .ui.inverted.vertical.footer.segment {
+    z-index: 101;
+  }
+
+  .sidebar.topic.search {
+    margin-left: 15px;
+  }
