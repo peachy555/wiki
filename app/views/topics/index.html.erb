@@ -1,15 +1,27 @@
 <h1>Wiki Prototype</h1>
 
 <h2>List of topics:</h2>
-<%= link_to "Add topic", new_topic_path %>
+
+<% if @user.present? %>
+  <% if @user.user_type == "admin" %> <!-- Only admin can create new topic -->
+    <%= link_to "Add topic", new_topic_path %>
+  <% end %>
+<% end %>
+
+<!-- List of topics -->
 <ul>
   <% @topics.each do |topic| %>
     <li>
       <%= link_to topic.name, topic_path(topic.id) %>
       <% if @user.present? %>
         <% if @user.user_type == "admin" %>
+
+          <!-- Only admin can edit/delete topic -->
           <span> | </span>
-          <%= link_to "delete", topic_path(topic.id), method: :delete, data: {confirm: "Are you sure?"} %>
+          <%= link_to "Delete", topic_path(topic.id), method: :delete, data: {confirm: "Are you sure?"} %>
+          <span> | </span>
+          <%= link_to "Edit", edit_topic_path(topic.id) %>
+          
         <% end %>
       <% end %>
     </li>

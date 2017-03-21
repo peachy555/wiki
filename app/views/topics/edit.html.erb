@@ -1,0 +1,10 @@
+<%= form_for @topic do |f| %>
+  <p>
+    <%= render partial: "includes/form_errors", locals: {form: f} %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit :edit %>
+  </p>
+<% end %>
