@@ -1,44 +1,33 @@
+
+<% @tags = Tag.all %>
+<% @topics = Topic.all %>
+
 <div class="ui left fixed vertical menu">
   <div class="header">
     <i class="search icon"></i> Search
   </div>
-
-  <%# f.select :user_type, [['Free account', 'free'], ['Member account', 'member'], ['Admin account', 'admin'], ]%>
-
-  <span class="sidebar topic search">
-    <div class="ui dropdown">
-      <div class="text">
-        Topic
-      </div>
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <div class="item">
-          Jenny Hess
-        </div>
-        <div class="item">
-          Elliot Fu
-        </div>
-        <div class="item">
-          Stevie Feliciano
-        </div>
-        <div class="item">
-          Christian
-        </div>
-        <div class="item">
-          Matt
-        </div>
-        <div class="item">
-          Justen Kitsune
+  <!-- Search form -->
+  <%= form_tag "/search", method: "post", class: "ui form" do %>
+    <!-- Topics list -->
+    <span class="sidebar topic search">
+      <div class="ui dropdown">
+        <input type="hidden" name="topic">
+        <div class="text">Topic</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <% @topics.each do |topic| %>
+            <div class="item"><%= topic.name %></div>
+          <% end %>
         </div>
       </div>
-    </div>
-  </span>
+    </span>
+    <!-- Tags list -->
+    <select name="tags[]" class="ui fluid search dropdown" multiple="">
+      <% @tags.each do |tag| %>
+        <option value="<%= tag.name %>"><%= tag.name %></option>
+      <% end %>
+    </select>
 
-  <select class="ui fluid search dropdown" multiple="">
-    <option value="">Tags</option>
-    <option value="AL">Alabama</option>
-    <option value="AK">Alaska</option>
-    <option value="AZ">Arizona</option>
-  </select>
-
+    <%= submit_tag "Go", class: "ui button primary" %>
+  <%end%>
 </div>

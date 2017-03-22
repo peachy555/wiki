@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
 
   # delete "cities/:city_id/activities/:activity_id", to: "activities#destroy", as: "delete_activity"
-
+  post "search", to: "search#index", as: "search"
   get "login", to: "sessions#new", as: "login"
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy", as: "logout"

@@ -12,6 +12,10 @@
     <%= f.label :member_content %>
     <%= f.text_field :member_content %>
   </p>
+  <p>
+    <label>Tags</label>
+    <input type="text" name="tags_string" value="<%= @tags_string %>">
+  </p>
   <%= hidden_field_tag 'topic_id', @topic_id %>
   <%= submit_tag "Go", class: "ui button primary" %>
 <% end %>

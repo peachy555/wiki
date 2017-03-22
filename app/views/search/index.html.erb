@@ -1,0 +1,31 @@
+<h1>Search Result</h1>
+<!-- Print headings -->
+<% if !@topic_name.empty? %>
+  <h3>Topic: <%= @topic_name %></h3>
+<% end %>
+<% if !@tags_array.empty? %>
+  <h3>
+    <span>Tags: | </span>
+    <% @tags_array.each do |tag_name| %>
+      <% tag = Tag.find_by(name: tag_name) %>
+      <%= link_to tag.name, tag_path(tag.id) %>
+      <span> | </span>
+    <% end %>
+  </h3>
+<% end %>
+
+<!-- Listing of search results -->
+<% if @page_list.empty? %>
+  <h2>No exact search result :(</h2>
+<% end %>
+<ul>
+  <% @page_list.each do |page| %>
+    <li><%= link_to page.name, page_path(page.id, topic_id: page.topic_id) %></li>
+  <% end %>
+</ul>
+<h3>Other possible </h3>
+<ul>
+  <% @page_list_other.each do |page| %>
+    <li><%= link_to page.name, page_path(page.id, topic_id: page.topic_id) %></li>
+  <% end %>
+</ul>

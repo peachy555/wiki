@@ -38,11 +38,24 @@ class PagesController < ApplicationController
   def edit
     @topic_id = params[:topic_id]
     @page = Page.find(params[:id])
+    @tags_string = ''
+    @page.tags.each do |tag|
+      @tags_string += (tag.name + ", ")
+    end
+    @tags_string = @tags_string.chomp(", ")
   end
 
   def update
     @page = Page.find(params[:id])
     if @page.update_attributes(clean_params)
+      tags_string = params[:tags_string]
+      tags_array = tags_string.split(", ")
+      tags_array.each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        if !@page.tags.exists? tag # if the tag doesn't exist in the list
+          @page.tags << tag
+        end
+      end
       redirect_to topic_path(params[:topic_id])
     else
       render :edit
