@@ -27,7 +27,7 @@
   }
 
   .ui.left.fixed.vertical.menu {
-    top:50px;
+    top:40px;
   }
 
   .ui.inverted.vertical.footer.segment {
@@ -40,4 +40,19 @@
 
   #username_display {
     color: white;
+  }
+
+  .header.search {
+    margin: 5px;
+    font-size: 20px;
+  }
+
+  .search.dropdown {
+    margin: 5px 0;
+  }
+
+  #rmenu{
+    display: inherit;
+    right: 0;
+    position: absolute;
   }

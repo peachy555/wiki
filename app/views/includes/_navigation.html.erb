@@ -7,11 +7,17 @@
       Wiki
     <%end%>
     <%= link_to "Home", root_path, class: "item" %>
-    <%= link_to "Signup", signup_path, class: "item" %>
-    <%= link_to "Log in", login_path, class: "item" %>
-    <%= link_to "Log out", logout_path, class: "item", method: "delete" %>
-    <% if user.present? %>
-      <span id="username_display">Welcome! <%= user.username %></span>
-    <% end %>
+
+    <!-- Find a way to move this chunk to the left side -->
+    <span id="rmenu">
+      <% if user.present? %>
+        <span id="username_display" class="item">Welcome! <%= user.username %></span>
+        <%= link_to "Log out", logout_path, class: "item", method: "delete" %>
+      <% else %>
+        <%= link_to "Signup", signup_path, class: "item" %>
+        <%= link_to "Log in", login_path, class: "item" %>
+      <% end %>
+    </span>
+
   </div>
 </div>
