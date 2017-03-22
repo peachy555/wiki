@@ -1,4 +1,3 @@
-
 <% @tags = Tag.all %>
 <% @topics = Topic.all %>
 
@@ -9,20 +8,16 @@
   <!-- Search form -->
   <%= form_tag "/search", method: "post", class: "ui form" do %>
     <!-- Topics list -->
-    <span class="sidebar topic search">
-      <div class="ui dropdown">
-        <input type="hidden" name="topic">
-        <div class="text">Topic</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <% @topics.each do |topic| %>
-            <div class="item"><%= topic.name %></div>
-          <% end %>
-        </div>
-      </div>
-    </span>
+    <select name="topic" class="ui dropdown">
+      <option value="">Choose a topic...</option>
+      <% @topics.each do |topic| %>
+        <option value="<%= topic.name %>"><%= topic.name %></option>
+      <% end %>
+    </select>
+
     <!-- Tags list -->
     <select name="tags[]" class="ui fluid search dropdown" multiple="">
+      <option value="">Choose some tags...</option>
       <% @tags.each do |tag| %>
         <option value="<%= tag.name %>"><%= tag.name %></option>
       <% end %>

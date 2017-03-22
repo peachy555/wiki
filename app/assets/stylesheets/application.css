@@ -37,3 +37,7 @@
   .sidebar.topic.search {
     margin-left: 15px;
   }
+
+  #username_display {
+    color: white;
+  }
