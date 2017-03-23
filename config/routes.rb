@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   resources :pages
   resources :tags
 
+  get "tag_weights/:page_id/:tag_id", to: "tag_weights#index"
+
   get "signup", to: "users#new", as: "signup"
   resources :users, only: [:create]
 
-  # delete "cities/:city_id/activities/:activity_id", to: "activities#destroy", as: "delete_activity"
+  delete "pages/:page_id/:tag_id", to: "tags#destroy", as: "remove_tag"
   post "search", to: "search#index", as: "search"
   get "login", to: "sessions#new", as: "login"
   post "login", to: "sessions#create"

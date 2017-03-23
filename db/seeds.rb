@@ -76,33 +76,50 @@ topics = [
 ] # topics
 
 tag_weights = [
-  {page_id: 1, tag_id:  1, score: 2}, # Jason => Action (Movie)
-  {page_id: 1, tag_id:  2, score: 2}, # Jason => Movie Star
-  {page_id: 2, tag_id:  1, score: 4}, # Hugh => Action (Movie)
-  {page_id: 2, tag_id:  2, score: 2}, # Hugh => Movie Star
-  {page_id: 2, tag_id:  3, score: 7}, # Hugh => Sci-fi
-  {page_id: 2, tag_id:  4, score: 9}, # Hugh => X-Men
-  {page_id: 3, tag_id:  1, score: 2}, # Vin => Action (Movie)
-  {page_id: 3, tag_id:  2, score: 1}, # Vin => Movie Star
-  {page_id: 3, tag_id:  5, score: 2}, # Vin => Thriller
-  {page_id: 3, tag_id:  6, score: 3}, # Vin => Fast and Furious
-  {page_id: 4, tag_id:  7, score: 2}, # Hedgehog => Animal
-  {page_id: 4, tag_id:  8, score: 4}, # Hedgehog => Mammal
-  {page_id: 4, tag_id:  9, score: 2}, # Hedgehog => Nocturnal
-  {page_id: 5, tag_id:  7, score: 2}, # Orangutan => Animal
-  {page_id: 5, tag_id:  8, score: 6}, # Orangutan => Mammal
-  {page_id: 5, tag_id: 10, score: 2}, # Orangutan => Monkey
-  {page_id: 6, tag_id:  7, score: 5}, # Chimpanzee => Animal
-  {page_id: 6, tag_id:  8, score: 2}, # Chimpanzee => Mammal
-  {page_id: 6, tag_id: 10, score: 7}, # Chimpanzee => Monkey
-  {page_id: 7, tag_id:  7, score: 2}, # Mouse => Animal
-  {page_id: 7, tag_id:  8, score: 9}, # Mouse => Mammal
-  {page_id: 7, tag_id: 11, score: 2}, # Mouse => Pest
-  {page_id: 8, tag_id:  7, score: 2}, # Cockroach => Animal
-  {page_id: 8, tag_id: 11, score: 1}, # Cockroach => Pest
-  {page_id: 8, tag_id: 12, score: 2}, # Cockroach => Insect
-  {page_id: 9, tag_id:  7, score: 1}, # Butterfly => Animal
-  {page_id: 9, tag_id: 12, score: 2}  # Butterfly => Insect
+  {page_id: 1, tag_id:  1, user_id: 1},
+  {page_id: 1, tag_id:  2, user_id: 1},
+  {page_id: 1, tag_id:  2, user_id: 2},
+  {page_id: 1, tag_id:  2, user_id: 3},
+  {page_id: 2, tag_id:  1, user_id: 1},
+  {page_id: 2, tag_id:  2, user_id: 1},
+  {page_id: 2, tag_id:  2, user_id: 2},
+  {page_id: 2, tag_id:  3, user_id: 1},
+  {page_id: 2, tag_id:  4, user_id: 1},
+  {page_id: 3, tag_id:  1, user_id: 1},
+  {page_id: 3, tag_id:  1, user_id: 2},
+  {page_id: 3, tag_id:  1, user_id: 3},
+  {page_id: 3, tag_id:  2, user_id: 1},
+  {page_id: 3, tag_id:  5, user_id: 1},
+  {page_id: 3, tag_id:  5, user_id: 3},
+  {page_id: 3, tag_id:  6, user_id: 1},
+  {page_id: 4, tag_id:  7, user_id: 1},
+  {page_id: 4, tag_id:  8, user_id: 1},
+  {page_id: 4, tag_id:  8, user_id: 2},
+  {page_id: 4, tag_id:  8, user_id: 3},
+  {page_id: 4, tag_id:  9, user_id: 1},
+  {page_id: 5, tag_id:  7, user_id: 1},
+  {page_id: 5, tag_id:  7, user_id: 2},
+  {page_id: 5, tag_id:  8, user_id: 1},
+  {page_id: 5, tag_id:  8, user_id: 3},
+  {page_id: 5, tag_id: 10, user_id: 1},
+  {page_id: 6, tag_id:  7, user_id: 1},
+  {page_id: 6, tag_id:  7, user_id: 2},
+  {page_id: 6, tag_id:  7, user_id: 3},
+  {page_id: 6, tag_id:  8, user_id: 1},
+  {page_id: 6, tag_id: 10, user_id: 1},
+  {page_id: 6, tag_id: 10, user_id: 3},
+  {page_id: 7, tag_id:  7, user_id: 1},
+  {page_id: 7, tag_id:  8, user_id: 1},
+  {page_id: 7, tag_id:  8, user_id: 2},
+  {page_id: 7, tag_id: 11, user_id: 1},
+  {page_id: 8, tag_id:  7, user_id: 1},
+  {page_id: 8, tag_id:  7, user_id: 3},
+  {page_id: 8, tag_id: 11, user_id: 1},
+  {page_id: 8, tag_id: 12, user_id: 1},
+  {page_id: 8, tag_id: 12, user_id: 2},
+  {page_id: 8, tag_id: 12, user_id: 3},
+  {page_id: 9, tag_id:  7, user_id: 1},
+  {page_id: 9, tag_id: 12, user_id: 1}
 ]
 
 users = [
@@ -140,7 +157,7 @@ topics.each do |topic|
 end
 
 tag_weights.each do |tag_weight|
-  new_tag_weight = TagWeight.find_or_create_by(page_id: tag_weight[:page_id], tag_id: tag_weight[:tag_id], score: tag_weight[:score])
+  new_tag_weight = TagWeight.find_or_create_by(page_id: tag_weight[:page_id], tag_id: tag_weight[:tag_id], user_id: tag_weight[:user_id])
 end
 
 users.each do |user|

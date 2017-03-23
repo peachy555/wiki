@@ -1,16 +1,29 @@
 <h1><%= @page.name %></h1>
 <h3>Tags:</h3>
+<!-- List of tags -->
 <ul>
   <% @page.tags.each do |tag| %>
     <li>
       <%= link_to tag.name, tag_path(tag.id) %>
-      <span><%= @tag_weights.find_by(tag_id: tag.id).score %></span>
-      <i class="add circle icon"></i>
-      <%# tag.name %>
+      <span><%= @tag_weights.group(:tag_id).count[tag.id] %></span>
+      <% if @user.present? %>
+        <a href="/tag_weights/<%= @page.id %>/<%= tag.id %>">
+          <% if @tag_weights.find_by(tag_id: tag.id, user_id: @user.id) %>
+            <i class="black add circle icon"></i>
+          <% else %>
+          <i class="blue add circle icon"></i>
+          <% end %>
+        </a>
+        <% if @user.user_type == "admin" %>
+          <%= link_to "Delete", remove_tag_path(@page.id, tag.id), method: :delete %>
+        <% end %>
+      <% end %>
     </li>
   <% end %>
 </ul>
+<!-- Free content -->
 <h3><%= @page.free_content %></h3>
+<!-- Member content -->
 <% if @user.present? %>
   <% if @user.user_type != "free" %>
     <h3><%= @page.member_content %></h3>

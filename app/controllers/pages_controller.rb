@@ -13,6 +13,7 @@ class PagesController < ApplicationController
   end
 
   def create
+    user = User.find_by_id(session[:user_id])
     @topic_id = params[:topic_id]
     # Create new page
     page_params = clean_params
@@ -24,7 +25,7 @@ class PagesController < ApplicationController
     tags_array.each do |tag_name|
       tag = Tag.find_or_create_by(name: tag_name)
       new_page.tags << tag
-      tag_weight = TagWeight.find_or_create_by(page_id: new_page.id , tag_id: tag.id, score: 1)
+      tag_weight = TagWeight.find_or_create_by(page_id: new_page.id, tag_id: tag.id, user_id: user.id)
     end
     # End of pages#create
     redirect_to topic_path(@topic_id)
@@ -58,7 +59,7 @@ class PagesController < ApplicationController
         tag = Tag.find_or_create_by(name: tag_name)
         if !@page.tags.exists? tag # if the tag doesn't exist in the list
           @page.tags << tag
-          tag_weight = TagWeight.find_or_create_by(page_id: @page.id , tag_id: tag.id, score: 1)
+          tag_weight = TagWeight.find_or_create_by(page_id: new_page.id, tag_id: tag.id, user_id: user.id)
         end
       end
       redirect_to topic_path(params[:topic_id])
