@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   validates_uniqueness_of :email, :username
+  validates_format_of  :email, :with => /.+@.+\..+/i
   # validates :email, exclusion: { # these emails are not allowed
   #   in: ["xander@me.com", "xander@ga.com"],
   #   message: "is a forbidden email address"

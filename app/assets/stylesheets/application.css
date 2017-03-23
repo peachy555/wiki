@@ -22,16 +22,24 @@
   }
 
   .ui.footer.segment {
-    margin: 5em 0em 0em;
-    padding: 5em 0em;
-  }
+    margin: 3em 0em 0em;
+    padding: 3em 0em;
 
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+  }
+/*
   .ui.left.fixed.vertical.menu {
     top:40px;
-  }
+  }*/
 
   .ui.inverted.vertical.footer.segment {
     z-index: 101;
+  }
+
+  .ui.fixed.inverted.menu {
+    z-index: 102;
   }
 
   .sidebar.topic.search {
@@ -43,7 +51,7 @@
   }
 
   .header.search {
-    margin: 5px;
+    margin: 45px 5px 5px 5px;
     font-size: 20px;
   }
 

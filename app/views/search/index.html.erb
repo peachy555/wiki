@@ -15,14 +15,15 @@
 <% end %>
 
 <!-- Listing of search results -->
-<% if @page_list.empty? %>
+<% if @sorted_page_list.empty? %>
   <h2>No exact search result :(</h2>
+<% else %>
+  <ul>
+    <% @sorted_page_list.each do |page| %>
+      <li><%= link_to page.name, page_path(page.id, topic_id: page.topic_id) %></li>
+    <% end %>
+  </ul>
 <% end %>
-<ul>
-  <% @page_list.each do |page| %>
-    <li><%= link_to page.name, page_path(page.id, topic_id: page.topic_id) %></li>
-  <% end %>
-</ul>
 
 <% if !@page_list_other.empty? %>
   <h3>Other pages you might be interested...</h3>

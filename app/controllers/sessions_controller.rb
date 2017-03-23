@@ -3,7 +3,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params[:email])
+    input = params[:input]
+    if (input.match /.+@.+\..+/i).nil? # Check if this is in an email format
+      user = User.find_by(username: input)
+    else
+      user = User.find_by(email: input)
+    end
+
     if user
       if user.authenticate(params[:password])
         # we have a real user
