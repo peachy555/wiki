@@ -5,7 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 puts "Start of seed script!"
+
+puts "Removing old data"
+Page.destroy_all
+TagWeight.destroy_all
+Tag.destroy_all
+Topic.destroy_all
+User.destroy_all
 
 puts "Generating data"
 topics = [
