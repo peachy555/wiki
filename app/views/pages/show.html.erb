@@ -4,6 +4,8 @@
   <% @page.tags.each do |tag| %>
     <li>
       <%= link_to tag.name, tag_path(tag.id) %>
+      <span><%= @tag_weights.find_by(tag_id: tag.id).score %></span>
+      <i class="add circle icon"></i>
       <%# tag.name %>
     </li>
   <% end %>

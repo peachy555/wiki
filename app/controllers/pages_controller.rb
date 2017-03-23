@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
 
   def show
-    
     @page = Page.find(params[:id])
+    @tag_weights = TagWeight.where(page_id: @page.id)
     @topic_id = params[:topic_id]
     @user = User.find_by_id(session[:user_id])
   end
@@ -24,14 +24,17 @@ class PagesController < ApplicationController
     tags_array.each do |tag_name|
       tag = Tag.find_or_create_by(name: tag_name)
       new_page.tags << tag
+      tag_weight = TagWeight.find_or_create_by(page_id: new_page.id , tag_id: tag.id, score: 1)
     end
-    binding.pry
     # End of pages#create
     redirect_to topic_path(@topic_id)
   end
 
   def destroy
     page = Page.find(params[:id]).destroy
+    TagWeight.where(page_id: page.id).each do |tag_weight|
+      tag_weight.delete
+    end
     flash[:success] = "You've deleted #{page.name}."
     redirect_to topic_path(params[:topic_id])   #, :country_id => params[:country_id]
   end
@@ -55,6 +58,7 @@ class PagesController < ApplicationController
         tag = Tag.find_or_create_by(name: tag_name)
         if !@page.tags.exists? tag # if the tag doesn't exist in the list
           @page.tags << tag
+          tag_weight = TagWeight.find_or_create_by(page_id: @page.id , tag_id: tag.id, score: 1)
         end
       end
       redirect_to topic_path(params[:topic_id])
