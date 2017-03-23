@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
   def show
+    
     @page = Page.find(params[:id])
     @topic_id = params[:topic_id]
     @user = User.find_by_id(session[:user_id])
