@@ -16,6 +16,8 @@ Topic.destroy_all
 User.destroy_all
 
 puts "Generating data"
+
+# Topics, pages and tags
 topics = [
   {
     name: "Biography",
@@ -83,54 +85,20 @@ topics = [
   } # Topic biology
 ] # topics
 
-tag_weights = [
-  {page_id: 1, tag_id:  1, user_id: 1},
-  {page_id: 1, tag_id:  2, user_id: 1},
-  {page_id: 1, tag_id:  2, user_id: 2},
-  {page_id: 1, tag_id:  2, user_id: 3},
-  {page_id: 2, tag_id:  1, user_id: 1},
-  {page_id: 2, tag_id:  2, user_id: 1},
-  {page_id: 2, tag_id:  2, user_id: 2},
-  {page_id: 2, tag_id:  3, user_id: 1},
-  {page_id: 2, tag_id:  4, user_id: 1},
-  {page_id: 3, tag_id:  1, user_id: 1},
-  {page_id: 3, tag_id:  1, user_id: 2},
-  {page_id: 3, tag_id:  1, user_id: 3},
-  {page_id: 3, tag_id:  2, user_id: 1},
-  {page_id: 3, tag_id:  5, user_id: 1},
-  {page_id: 3, tag_id:  5, user_id: 3},
-  {page_id: 3, tag_id:  6, user_id: 1},
-  {page_id: 4, tag_id:  7, user_id: 1},
-  {page_id: 4, tag_id:  8, user_id: 1},
-  {page_id: 4, tag_id:  8, user_id: 2},
-  {page_id: 4, tag_id:  8, user_id: 3},
-  {page_id: 4, tag_id:  9, user_id: 1},
-  {page_id: 5, tag_id:  7, user_id: 1},
-  {page_id: 5, tag_id:  7, user_id: 2},
-  {page_id: 5, tag_id:  8, user_id: 1},
-  {page_id: 5, tag_id:  8, user_id: 3},
-  {page_id: 5, tag_id: 10, user_id: 1},
-  {page_id: 6, tag_id:  7, user_id: 1},
-  {page_id: 6, tag_id:  7, user_id: 2},
-  {page_id: 6, tag_id:  7, user_id: 3},
-  {page_id: 6, tag_id:  8, user_id: 1},
-  {page_id: 6, tag_id:  8, user_id: 2},
-  {page_id: 6, tag_id:  8, user_id: 3},
-  {page_id: 6, tag_id: 10, user_id: 1},
-  {page_id: 6, tag_id: 10, user_id: 3},
-  {page_id: 7, tag_id:  7, user_id: 1},
-  {page_id: 7, tag_id:  8, user_id: 1},
-  {page_id: 7, tag_id: 11, user_id: 1},
-  {page_id: 8, tag_id:  7, user_id: 1},
-  {page_id: 8, tag_id:  7, user_id: 3},
-  {page_id: 8, tag_id: 11, user_id: 1},
-  {page_id: 8, tag_id: 12, user_id: 1},
-  {page_id: 8, tag_id: 12, user_id: 2},
-  {page_id: 8, tag_id: 12, user_id: 3},
-  {page_id: 9, tag_id:  7, user_id: 1},
-  {page_id: 9, tag_id: 12, user_id: 1}
-]
+topics.each do |topic|
+  new_topic = Topic.create(name: topic[:name])
+  topic[:pages].each do |page|
+    new_page = Page.create(name: page[:name], free_content: page[:free_content], member_content: page[:member_content], topic_id: new_topic.id)
 
+    page[:tags].each do |tag_name|
+      new_tag = Tag.find_or_create_by(name: tag_name)
+      new_page.tags << new_tag
+    end
+  end
+end
+
+
+# Users
 users = [
   {
     username: 'Free',
@@ -152,27 +120,25 @@ users = [
   }
 ]
 
-puts "Generating database"
-topics.each do |topic|
-  new_topic = Topic.create(name: topic[:name])
-  topic[:pages].each do |page|
-    new_page = Page.create(name: page[:name], free_content: page[:free_content], member_content: page[:member_content], topic_id: new_topic.id)
-
-    page[:tags].each do |tag_name|
-      new_tag = Tag.find_or_create_by(name: tag_name)
-      new_page.tags << new_tag
-    end
-  end
-end
-
-tag_weights.each do |tag_weight|
-  new_tag_weight = TagWeight.find_or_create_by(page_id: tag_weight[:page_id], tag_id: tag_weight[:tag_id], user_id: tag_weight[:user_id])
-end
-
 users.each do |user|
   new_user = User.new(username: user[:username], email: user[:email], password: user[:password], user_type: user[:user_type])
   new_user.save
 end
 
+
+# TagWeights
+id = []
+User.all.each do |user|
+  id << user.id
+end
+Page.all.each do |page|
+  page.tags.each do |tag|
+    for(i=0, i<3, i++)
+      if [true, false].sample
+        TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: id.sample)
+      end
+    end
+  end
+end
 
 puts "End of seed script!"
