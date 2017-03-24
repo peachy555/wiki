@@ -127,15 +127,11 @@ end
 
 
 # TagWeights
-id = []
-User.all.each do |user|
-  id << user.id
-end
 Page.all.each do |page|
   page.tags.each do |tag|
-    for(i=0, i<3, i++)
+    User.all.each do |user|
       if [true, false].sample
-        TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: id.sample)
+        TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: user.id)
       end
     end
   end
