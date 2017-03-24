@@ -1,5 +1,18 @@
 <h1><%= @page.name %></h1>
 <h3>Tags:</h3>
+<% if @user.present? %>
+  <% if @user.user_type == "admin" || @user.user_type == "member" %>
+    <div id="add_tag_btn" class="ui button">Add Tag</div>
+    <%= form_for Tag.new do %>
+      <div id="tag_form">
+        <label>Tag name: </label>
+        <input type="text" name="tags_string" value='' >
+        <%= hidden_field_tag 'page_id', @page.id %>
+        <%= submit_tag "Go", id: "tag_submit_btn", class: "ui button primary" %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
 <!-- List of tags -->
 <ul>
   <% @page.tags.each do |tag| %>

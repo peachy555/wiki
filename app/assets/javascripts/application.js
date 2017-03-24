@@ -15,6 +15,18 @@
 //= require_tree .
 
 $(document).ready(function(){
+  $('#tag_form').hide();
+
+  $('#add_tag_btn').on( "click", function() {
+    $('#add_tag_btn').hide();
+    $('#tag_form').show ();
+  });
+
+  $('#tag_submit_btn').on( "click", function() {
+    $('#add_tag_button').hide();
+    $('#tag_form').show ();
+  });
+
   $('.ui.dropdown')
   .dropdown();
 
@@ -22,7 +34,15 @@ $(document).ready(function(){
   .on('click', function() {
     $(this)
       .closest('.message')
-      .transition('fade')
-    ;
+      .transition('fade');
   });
+
+  $('.activating.element')
+    .popup();
+
+  $('.button')
+    .popup({
+      inline: true
+    });
+
 });

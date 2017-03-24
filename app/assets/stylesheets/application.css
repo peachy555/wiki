@@ -16,6 +16,7 @@
   .ui.menu .item img.logo {
     margin-right: 1.5em;
   }
+  
   .main.container {
     margin-top: 7em;
     margin-left:300px!important;
@@ -29,10 +30,6 @@
     bottom: 0px;
     width: 100%;
   }
-/*
-  .ui.left.fixed.vertical.menu {
-    top:40px;
-  }*/
 
   .ui.inverted.vertical.footer.segment {
     z-index: 101;
