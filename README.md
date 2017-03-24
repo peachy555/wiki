@@ -1,8 +1,11 @@
 # Project_1: Wiki
 -----------------------------------------------------------------------------------------
+Heroku app: quiet-wave-38361.herokuapp.com
 
 ## Intro
 In this project, I created a website similar to Wikipedia. But instead of having pages linked together through links in the content, I created a website with more structure and easier to use and access wanted content.
+
+Database of this project is stored and manage through Postgres (instead of SQLite, used in class demo).
 
 The website breaks down into different topics which contains pages related to each topic. Each page can be attached with tags which will help user identify what the contents in that page can possibly be about. The page can be searched through using selected topic and/or  combination of related tags. Each tag will contain score recorded by tag-weigh system, the score will signify how relevant the tag is to the page. Each user types will have different accessibility to website and its contents.
 
