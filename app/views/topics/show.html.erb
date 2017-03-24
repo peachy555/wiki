@@ -1,5 +1,8 @@
-<h1><%= @topic.name %></h1>
+<div class="ui primary button back_link">
+  <%= link_to "Back", root_path %>
+</div>
 
+<h1><%= @topic.name %></h1>
 <h2>List of related pages:</h2>
 
 <% if @user.present? %> <!-- Only logged in users can create new page -->
