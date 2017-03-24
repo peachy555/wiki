@@ -1,9 +1,9 @@
 <h1>Search Result</h1>
 <!-- Print headings -->
-<% if !@topic_name.empty? %>
+<% if @topic_name.present? %>
   <h3>Topic: <%= @topic_name %></h3>
 <% end %>
-<% if !@tags_array.nil? %>
+<% if @tags_array.any? %>
   <h3>
     <span>Tags: | </span>
     <% @tags_array.each do |tag_name| %>
@@ -15,6 +15,7 @@
 <% end %>
 
 <!-- Listing of search results -->
+<!-- Exact combination results, with sorting -->
 <% if @sorted_page_list.empty? %>
   <h2>No exact search result :(</h2>
 <% else %>
@@ -24,8 +25,8 @@
     <% end %>
   </ul>
 <% end %>
-
-<% if !@page_list_other.empty? %>
+<!-- Other relevant results -->
+<% if @page_list_other.any? %>
   <h3>Other pages you might be interested...</h3>
   <ul>
     <% @page_list_other.each do |page| %>

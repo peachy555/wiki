@@ -2,13 +2,14 @@ class SearchController < ApplicationController
   def index
     @topic_name = params[:topic]
     @tags_array = params[:tags]
+    @tags_array = [] if @tags_array.nil? # no tags chosen, then params[:tags] will be nil, need to assign it with empty array so that it can be apply with .any? method
     page_list = []
     @page_list_other = []
     # Get exact search result
     if @topic_name.empty?
       pages = Page.all ### still have problem with topic name passed from side menu form "refer to _side_menu.html.erb"
       pages.each do |page|
-        if !@tags_array.nil?
+        if @tags_array.any?
           got_all_tags = true
           @tags_array.each do |tag_name|
             # check with all tags we want in the page. If any tag is missing from the current page, trigger as false
@@ -18,9 +19,10 @@ class SearchController < ApplicationController
         end
       end
     else
+      # Case for search with topic and tags
       topic = Topic.find_by(name: @topic_name) # still have problem with topic name passed from side menu form "refer to _side_menu.html.erb"
       topic.pages.each do |page|
-        if !@tags_array.nil?
+        if @tags_array.any?
           got_all_tags = true
           @tags_array.each do |tag_name|
             # check with all tags we want in the page. If any tag is missing from the current page, trigger as false
@@ -40,6 +42,9 @@ class SearchController < ApplicationController
       tag_weight = TagWeight.where(page_id: page.id)
       @tags_array.each do |tag_name|
         tag = Tag.find_by(name: tag_name)
+        ###########################################################################
+        ### Problem with .group method, used to work before, no changes was made in this area
+        ###########################################################################
         sum += tag_weight.group(:tag_id).count[tag.id]
       end
       # Same score as prev page?

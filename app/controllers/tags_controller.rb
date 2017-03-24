@@ -3,10 +3,6 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
   end
 
-  def show
-    @tags_string = ''
-  end
-
   def create
     user = User.find_by_id(session[:user_id])
     page = Page.find(params[:page_id])

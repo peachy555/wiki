@@ -9,6 +9,7 @@
 puts "Start of seed script!"
 
 puts "Removing old data"
+# Can't db:reset on Heroku. Therefore, old data need to be manually remove in order to update new data
 Page.destroy_all
 TagWeight.destroy_all
 Tag.destroy_all
@@ -86,17 +87,18 @@ topics = [
 ] # topics
 
 topics.each do |topic|
+  # Create topics
   new_topic = Topic.create(name: topic[:name])
   topic[:pages].each do |page|
+    # Create pages
     new_page = Page.create(name: page[:name], free_content: page[:free_content], member_content: page[:member_content], topic_id: new_topic.id)
-
     page[:tags].each do |tag_name|
+      # Create tags
       new_tag = Tag.find_or_create_by(name: tag_name)
       new_page.tags << new_tag
     end
   end
 end
-
 
 # Users
 users = [
@@ -120,19 +122,19 @@ users = [
   }
 ]
 
+# Create users
 users.each do |user|
   new_user = User.new(username: user[:username], email: user[:email], password: user[:password], user_type: user[:user_type])
   new_user.save
 end
 
-
-# TagWeights
+# Create TagWeights
 Page.all.each do |page|
   page.tags.each do |tag|
+    # Initialise all TagWeights to be one, voted by first user
+    TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: User.first.id)
     User.all.each do |user|
-      if user.id == 1
-        TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: user.id)
-      end
+      # Randomly generate additional votes
       if [true, false].sample
         TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: user.id)
       end
