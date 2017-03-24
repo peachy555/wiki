@@ -1,7 +1,10 @@
 # Project_1: Wiki
+-----------------------------------------------------------------------------------------
 
 ## Intro
 In this project I created a website similar to Wikipedia. But instead of having pages linked together in the content, I created a website with more structure and easier to use and access wanted content.
+
+I wanted to do a project that have a lot of data calling and manipulation in order to get used to how Rails and ActiveRecord works.
 
 ## Layout
 The pages are categorised under their related topics. Each page can contain multiple tags which each user can choose to attach or increase their rating.
@@ -22,3 +25,7 @@ Anonymous user will only be able to view free contents and use search sidebar.
 Free account will also be able to create new page under existing topic and rate existing tags.
 ### Member Account
 On top of everything, member account will be able to access member content and attach new tags to the page.
+### Admin Account
+Full access on all contents. Able to add, edit and delete pages, topics, contents and tags.
+
+---------------------------------------------------------------------------------------
