@@ -1,6 +1,6 @@
 # Project_1: Wiki
 -----------------------------------------------------------------------------------------
-Heroku app: quiet-wave-38361.herokuapp.com
+Heroku app: [http://quiet-wave-38361.herokuapp.com](http://quiet-wave-38361.herokuapp.com)
 
 ## Intro
 In this project, I created a website similar to Wikipedia. But instead of having pages linked together through links in the content, I created a website with more structure and easier to use and access wanted content.
