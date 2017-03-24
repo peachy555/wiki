@@ -130,6 +130,9 @@ end
 Page.all.each do |page|
   page.tags.each do |tag|
     User.all.each do |user|
+      if user.id == 1
+        TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: user.id)
+      end
       if [true, false].sample
         TagWeight.find_or_create_by(page_id: page.id, tag_id: tag.id, user_id: user.id)
       end
