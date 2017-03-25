@@ -42,9 +42,6 @@ class SearchController < ApplicationController
       tag_weight = TagWeight.where(page_id: page.id)
       @tags_array.each do |tag_name|
         tag = Tag.find_by(name: tag_name)
-        ###########################################################################
-        ### Problem with .group method, used to work before, no changes was made in this area
-        ###########################################################################
         sum += tag_weight.group(:tag_id).count[tag.id]
       end
       # Same score as prev page?
